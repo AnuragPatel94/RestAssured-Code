@@ -1,1 +1,144 @@
+package session03;
 
+import org.testng.annotations.Test;
+
+import static io.restassured.RestAssured.*;
+import io.restassured.response.Response;
+import junit.framework.Assert;
+
+public class Test_GetMethod {
+
+	@Test
+	public void test01()
+	{
+		Response response = get("https://reqres.in/api/users?page=2");
+		System.out.println("Response code:" + response.getStatusCode());
+		System.out.println("Response body:" + response.getBody().asString());
+		System.out.println("Response Time:" + response.getTime());
+		System.out.println("Response Header:" + response.getHeader("Content-Type"));
+		
+		//validate status code
+		//expected status code =200
+		
+		int expectedStatusCode = 200;
+		int ActualStatuscode = response.getStatusCode();
+		
+		Assert.assertEquals(expectedStatusCode, ActualStatuscode);
+		
+
+		
+	}
+	
+	@Test
+	public void test02()
+	{
+		//given , when, then
+		baseURI="https://reqres.in/api/users";
+		given()
+		.queryParam("page", "2")
+		.when().get()
+		.then().statusCode(208);
+		
+	}
+	
+}
+
+
+public class Test_DeleteMethod {
+
+	@Test
+	public void test06()
+	{
+		RestAssured.baseURI="https://reqres.in/api/users/52";
+		RestAssured.given().
+		when().
+			delete().
+		then().
+			log().all().
+			statusCode(204);
+	}
+			
+}
+
+package session03;
+
+import org.json.simple.JSONObject;
+import org.testng.annotations.Test;
+
+import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
+
+public class Test_PatchMethod {
+
+	@Test
+	public void test05()
+	{
+		JSONObject jsonData = new JSONObject();
+		jsonData.put("name", "Neeraj");
+		jsonData.put("job", "Tester");
+		
+		RestAssured.baseURI="https://reqres.in/api/users/52";
+		RestAssured.given().header("Content-type","application/json").
+			contentType(ContentType.JSON).
+			body(jsonData.toJSONString()).
+        when().
+        	patch().
+        then().
+        	statusCode(200).
+        	log().all();
+	}
+}
+
+package session03;
+
+import org.json.simple.JSONObject;
+import org.testng.annotations.Test;
+
+import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
+
+public class Test_PostMethod {
+
+	@Test
+	public void test03()
+	{
+		JSONObject jsonData = new JSONObject();
+		jsonData.put("name", "Prachi");
+		jsonData.put("job", "QA");
+		
+		RestAssured.baseURI="https://reqres.in/api/users";
+		RestAssured.given().header("Content-type","application/json").
+        contentType(ContentType.JSON).
+        body(jsonData.toJSONString()).
+        when().post().
+        then().statusCode(201).log().all();
+		
+
+	}
+}
+
+package session03;
+
+import org.json.simple.JSONObject;
+import org.testng.annotations.Test;
+
+import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
+
+public class Test_PutMethod {
+
+	@Test
+	public void test04()
+	{
+		JSONObject jsonData = new JSONObject();
+		jsonData.put("name", "Sheetal");
+		jsonData.put("job", "teacher");
+		
+		RestAssured.baseURI="https://reqres.in/api/users/52";
+		RestAssured.given().header("Content-type","application/json").
+        contentType(ContentType.JSON).
+        body(jsonData.toJSONString()).
+        when().put().
+        then().statusCode(200).log().all();
+	}
+}
