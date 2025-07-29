@@ -4,7 +4,6 @@ import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.*;
 import io.restassured.response.Response;
-import junit.framework.Assert;
 
 public class Test_GetMethod {
 
@@ -60,13 +59,6 @@ public class Test_DeleteMethod {
 			
 }
 
-package session03;
-
-import org.json.simple.JSONObject;
-import org.testng.annotations.Test;
-
-import io.restassured.RestAssured;
-import io.restassured.http.ContentType;
 
 public class Test_PatchMethod {
 
@@ -89,13 +81,7 @@ public class Test_PatchMethod {
 	}
 }
 
-package session03;
 
-import org.json.simple.JSONObject;
-import org.testng.annotations.Test;
-
-import io.restassured.RestAssured;
-import io.restassured.http.ContentType;
 
 public class Test_PostMethod {
 
@@ -117,13 +103,6 @@ public class Test_PostMethod {
 	}
 }
 
-package session03;
-
-import org.json.simple.JSONObject;
-import org.testng.annotations.Test;
-
-import io.restassured.RestAssured;
-import io.restassured.http.ContentType;
 
 public class Test_PutMethod {
 
